@@ -75,6 +75,24 @@
             <input name="selectRol" value="{{info_perfil_session[0]['id_rol']}}" hidden>
             {%endif%}
           </div>
+          <div class="mb-3">
+            <label for="estado" class="form-label">Estado</label>
+            <input
+              class="form-control"
+              type="text"
+              name="estado"
+              value="{{ info_perfil_session[0]['estado'] }}"
+              />
+          </div>
+          <div class="mb-3">
+            <label for="genero" class="form-label">Género</label>
+            <input
+              class="form-control"
+              type="text"
+              name="genero"
+              value="{{ info_perfil_session[0]['genero'] }}"
+              />
+          </div>
           {% if dataLogin.rol == info_perfil_session[0]['id_rol'] %}
           <div class="mb-3 form-password-toggle mt-3">
             <label class="form-label" for="pass_actual">Clave Actual</label>

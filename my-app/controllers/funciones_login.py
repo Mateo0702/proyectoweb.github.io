@@ -64,7 +64,7 @@ def info_perfil_session(id):
     try:
         with connectionBD() as conexion_MySQLdb:
             with conexion_MySQLdb.cursor(dictionary=True) as cursor:
-                querySQL = "SELECT id_usuario, nombre_usuario, apellido_usuario, cedula, id_area, id_rol FROM usuarios WHERE id_usuario = %s"
+                querySQL = "SELECT id_usuario, nombre_usuario, apellido_usuario, cedula, id_area, id_rol, estado, genero FROM usuarios WHERE id_usuario = %s"
                 cursor.execute(querySQL, (id,))
                 info_perfil = cursor.fetchall()
         return info_perfil
@@ -80,7 +80,9 @@ def procesar_update_perfil(data_form,id):
     nombre_usuario = data_form['name']
     apellido_usuario = data_form['surname']
     id_area = data_form['selectArea']
-    id_rol= data_form['selectRol']
+    id_rol = data_form['selectRol']
+    estado = data_form['estado']
+    genero = data_form['genero']
     
     new_pass_user = data_form['new_pass_user']
     
@@ -98,10 +100,12 @@ def procesar_update_perfil(data_form,id):
                             apellido_usuario = %s,
                             id_area = %s,
                             id_rol = %s,
+                            estado = %s,
+                            genero = %s,
                             password = %s
                         WHERE id_usuario = %s
                     """
-                    params = (nombre_usuario,apellido_usuario, id_area, id_rol,
+                    params = (nombre_usuario,apellido_usuario, id_area, id_rol, estado, genero,
                                 nueva_password, id_user)
                     cursor.execute(querySQL, params)
                     conexion_MySQLdb.commit()
